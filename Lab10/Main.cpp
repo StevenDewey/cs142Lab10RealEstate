@@ -22,6 +22,61 @@ void check_cin(int& userInput)
 
 int main()
 {
+	vector<Property*> Properties;
+	string fileName;
+	cout << "Name of File: " << endl;
+	cin >> fileName;
+	string line;
+	ifstream myfile (fileName);
+	if (myfile.is_open())
+	{
+		while ( getline (myfile,line) )
+		{
+			int i=0;
+			while (!isspace(line[i]))
+			{
+				i++;
+			}
+			while (isspace(line[i]))
+			{
+				i++;
+			}
+
+			while (!isspace(line[i]))
+			{
+				i++;
+			}
+			while (isspace(line[i]))
+			{
+				i++;
+			}
+
+			while (!isspace(line[i]))
+			{
+				i++;
+			}
+			while (isspace(line[i]))
+			{
+				i++;
+			}
+
+			while (!isspace(line[i]))
+			{
+				i++;
+			}
+			while (isspace(line[i]))
+			{
+				i++;
+			}
+			string address = line.substr(i);
+			Properties.push_back(new Property(address));
+		}
+	}
+
+	for (int i = 0; i < Properties.size(); i++)
+	{
+		cout << Properties[i]->toString();
+	}
 
 
 	system("pause");
