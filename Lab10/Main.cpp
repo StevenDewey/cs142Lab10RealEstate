@@ -33,43 +33,179 @@ int main()
 		while ( getline (myfile,line) )
 		{
 			int i=0;
-			while (!isspace(line[i]))
+			while (isalpha(line[i]))
 			{
 				i++;
 			}
-			while (isspace(line[i]))
+			string type = line.substr(0,i);
+			if (type == "Residential")
 			{
-				i++;
+				cout << type << endl;
+				while (isspace(line[i]))
+				{
+					i++;
+				}
+				int j = i; //to determine the starting place for the rental digit
+				while (!isspace(line[i]))
+				{
+					i++;
+				}
+				string rental = line.substr(j,i-j); //collecting what should be one digit either 0 or 1
+				cout << rental << endl;
+				if (rental.size() > 1)
+				{
+					//do nothing for now
+				}
+				else
+				{
+					while (isspace(line[i]))//this is looping through what should be one space with no characters present 
+					{
+						i++;
+					}
+					int k = i;
+					if (!isdigit(line[i]))
+					{
+						//do nothing for now.
+					}
+					else
+					{
+						while (isdigit(line[i]))//this should loop through what the value of the property is
+						{
+							i++;
+						}
+						string value = line.substr(k,i-k); //collecting what should be the value of the property
+						cout << value << endl;
+						while (isspace(line[i]))//this is looping through what should be one space with no characters present
+						{
+							i++;
+						}
+						int l = i;
+						if (!isdigit(line[i]))
+						{
+							//do nothing for now
+						}
+						else
+						{
+							while (!isspace(line[i]))//determining vacancy
+							{
+								i++;
+							}
+							string vacant = line.substr(l,i-l);
+							cout << vacant << endl;
+							if (vacant.size() > 1)
+							{
+								//do nothing for now
+							}
+							else
+							{
+								while (isspace(line[i]))//this is looping through what should be one space with no characters present
+								{
+									i++;
+								}
+								string address = line.substr(i);
+								cout << address << endl;
+								Properties.push_back(new Property(address));
+							}
+						}
+					}
+				}
 			}
-
-			while (!isspace(line[i]))
+			else if (type == "Commercial")
 			{
-				i++;
+				cout << type << endl;
+				while (isspace(line[i]))
+				{
+					i++;
+				}
+				int j = i; //to determine the starting place for the rental digit
+				while (!isspace(line[i]))
+				{
+					i++;
+				}
+				string rental = line.substr(j,i-j); //collecting what should be one digit either 0 or 1
+				cout << rental << endl;
+				if (rental.size() > 1)
+				{
+					//do nothing for now
+				}
+				else
+				{
+					while (isspace(line[i]))//this is looping through what should be one space with no characters present 
+					{
+						i++;
+					}
+					int k = i;
+					if (!isdigit(line[i]))
+					{
+						//do nothing for now.
+					}
+					else
+					{
+						while (isdigit(line[i]))//this should loop through what the value of the property is
+						{
+							i++;
+						}
+						string value = line.substr(k,i-k); //collecting what should be the value of the property
+						cout << value << endl;
+						while (isspace(line[i]))//this is looping through what should be one space with no characters present
+						{
+							i++;
+						}
+						int l = i;
+						if (!isdigit(line[i]))
+						{
+							//do nothing for now
+						}
+						else
+						{
+							while (!isspace(line[i]))//determining vacancy
+							{
+								i++;
+							}
+							string vacant = line.substr(l,i-l);
+							cout << vacant << endl;
+							if (vacant.size() > 1)
+							{
+								//do nothing for now
+							}
+							else
+							{
+								while (isspace(line[i]))//this is looping through what should be one space with no characters present
+								{
+									i++;
+								}
+								if (!isdigit(line[i]))
+								{
+									//do nothing for now
+								}
+								else
+								{
+									int m = i;
+									while (!isspace(line[i]))//determining vacancy
+									{
+										i++;
+									}
+									string discount = line.substr(m,i-m);
+									cout << discount << endl;
+									while (isspace(line[i]))//this is looping through what should be one space with no characters present
+									{
+										i++;
+									}
+									string address = line.substr(i);
+									cout << address << endl;
+									Properties.push_back(new Property(address));
+								}
+							}
+						}
+					}
+				}
 			}
-			while (isspace(line[i]))
+			else
 			{
-				i++;
-			}
-
-			while (!isspace(line[i]))
-			{
-				i++;
-			}
-			while (isspace(line[i]))
-			{
-				i++;
-			}
-
-			while (!isspace(line[i]))
-			{
-				i++;
-			}
-			while (isspace(line[i]))
-			{
-				i++;
-			}
-			string address = line.substr(i);
-			Properties.push_back(new Property(address));
+				
+				string entireLine = line;
+				cout << entireLine << endl;
+			}	
 		}
 	}
 

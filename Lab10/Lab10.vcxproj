@@ -62,11 +62,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Commercial.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Property.cpp" />
+    <ClCompile Include="Residential.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Commercial.h" />
     <ClInclude Include="Property.h" />
+    <ClInclude Include="Residential.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
