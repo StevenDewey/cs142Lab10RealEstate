@@ -10,8 +10,11 @@ using namespace std;
 class Property
 {
 	private:
+		bool rental;
+		double value;
 		string address;
-
+		static int counter;
+		int propertyID;
 	public:
 		//---------------------------------------------------------------------------------------
 		/* 
@@ -22,8 +25,8 @@ class Property
 		 * Parameter: address_in
 		 *		The address of a new Property
 		 */
-		Property(string address_in);
-		virtual ~Property();
+		Property(bool rental_in, double value_in, string address_in);
+		~Property();
 		
 		//---------------------------------------------------------------------------------------
 		/* 
@@ -34,6 +37,6 @@ class Property
 		 * Return:
 		 *		A data string about this property
 		 */
-		string toString();
+		virtual string toString();
 		//---------------------------------------------------------------------------------------
 };

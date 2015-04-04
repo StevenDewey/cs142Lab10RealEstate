@@ -3,9 +3,8 @@
 class Commercial : public Property
 {
 	private:
-		int rental;
-		double value;
-		int vacant;
+		bool bdiscount;
+		double discount;
 
 	public:
 		//---------------------------------------------------------------------------------------
@@ -15,7 +14,7 @@ class Commercial : public Property
 		 * Handles creation and deletion of Residential Property objects.
 		 * 
 		 */
-		Commercial(int rental_in, double value_in, int vacant_in);
+		Commercial(bool rental_in, double value_in, bool bdiscouont_in, string address_in, double discount);
 		~Commercial();
 		
 		//---------------------------------------------------------------------------------------

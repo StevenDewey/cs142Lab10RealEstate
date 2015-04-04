@@ -7,6 +7,8 @@
 #include <math.h>
 #include <sstream>
 #include "Property.h"
+#include "Residential.h"
+#include "Commercial.h"
 
 using namespace std;
 
@@ -104,7 +106,29 @@ int main()
 								}
 								string address = line.substr(i);
 								cout << address << endl;
-								Properties.push_back(new Property(address));
+								bool brental;
+								if (rental == "0")
+								{
+									brental = false;
+								}
+								else
+								{
+									brental = true;
+								}
+								bool occupied;
+								if (vacant == "0")
+								{
+									occupied = false;
+								}
+								else
+								{
+									occupied = true;
+								}
+								double dvalue;
+								stringstream st;
+								st << value;
+								st >> dvalue;
+								Properties.push_back(new Residential(brental, dvalue, occupied, address));
 							}
 						}
 					}
@@ -193,7 +217,33 @@ int main()
 									}
 									string address = line.substr(i);
 									cout << address << endl;
-									Properties.push_back(new Property(address));
+									bool brental;
+								if (rental == "0")
+								{
+									brental = false;
+								}
+								else
+								{
+									brental = true;
+								}
+								bool bdiscount;
+								if (vacant == "0")
+								{
+									bdiscount = false;
+								}
+								else
+								{
+									bdiscount = true;
+								}
+								double dvalue;
+								stringstream st;
+								st << value;
+								st >> dvalue;
+								double ddiscount;
+								stringstream st2;
+								st2 << discount;
+								st2 >> ddiscount;
+								Properties.push_back(new Commercial(brental, dvalue, bdiscount, address, ddiscount));
 								}
 							}
 						}
@@ -211,7 +261,7 @@ int main()
 
 	for (int i = 0; i < Properties.size(); i++)
 	{
-		cout << Properties[i]->toString();
+		cout << Properties[i]->toString() << endl;
 	}
 
 

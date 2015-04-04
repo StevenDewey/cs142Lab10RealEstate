@@ -6,11 +6,16 @@
 
 using namespace std;
 
+int Property::counter = 0;
+
 //---------------------------------------------------------------------------------------
-Property::Property(string address_in)
+Property::Property(bool rental_in, double value_in, string address_in)
 {
+	rental = rental_in;
+	value = value_in;
 	address = address_in;
-	
+	propertyID = counter;
+	counter++;
 }
 Property::~Property(){}
 
@@ -18,7 +23,17 @@ Property::~Property(){}
 string Property::toString()
 {
 	stringstream ss;
-	ss << "\nAddress: " << address << endl;
+	ss << "Property id: " << propertyID << " ";
+	ss << "Address: " << address << " ";
+	if (rental)
+	{
+		ss << "Rental ";
+	}
+	else
+	{
+		ss << "NOT rental ";
+	}
+	ss << "Estimated value: " << value << " ";
 	
 	return ss.str();
 }
