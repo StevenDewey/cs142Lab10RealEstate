@@ -39,4 +39,6 @@ class Property
 		 */
 		virtual string toString();
 		//---------------------------------------------------------------------------------------
+		virtual string taxReport();
+		virtual double getTaxDue();
 };

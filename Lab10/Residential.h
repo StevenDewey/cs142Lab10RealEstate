@@ -9,6 +9,8 @@ class Residential : public Property
 {
 	private:
 		bool vacant;
+		double newValue;
+		double taxDue;
 	public:
 		//---------------------------------------------------------------------------------------
 		/* 
@@ -19,7 +21,8 @@ class Residential : public Property
 		 */
 		Residential(bool rental_in, double value_in, bool vacant_in, string address_in);
 		~Residential();
-		
+		string taxReport();
+		double getTaxDue();
 		//---------------------------------------------------------------------------------------
 		/* 
 		 * toString

@@ -38,3 +38,18 @@ string Property::toString()
 	return ss.str();
 }
 //---------------------------------------------------------------------------------------
+
+string Property::taxReport()
+{
+	stringstream ss;
+	ss << "** Taxes due for the property at: " << address << endl;
+	ss << "Property id: " << propertyID << endl;
+	ss << "This property has an estimated value of: " << value << endl;
+	
+
+	return ss.str();
+}
+double Property::getTaxDue()
+{
+	return 0;
+}

@@ -5,6 +5,9 @@ class Commercial : public Property
 	private:
 		bool bdiscount;
 		double discount;
+		double newValue;
+		bool newRental;
+		double taxDue;
 
 	public:
 		//---------------------------------------------------------------------------------------
@@ -16,6 +19,8 @@ class Commercial : public Property
 		 */
 		Commercial(bool rental_in, double value_in, bool bdiscouont_in, string address_in, double discount);
 		~Commercial();
+		string taxReport();
+		double getTaxDue();
 		
 		//---------------------------------------------------------------------------------------
 		/* 
