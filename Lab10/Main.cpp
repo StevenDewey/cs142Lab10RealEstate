@@ -7,6 +7,8 @@
 #include <math.h>
 #include <sstream>
 #include "Property.h"
+#include "Residential.h"
+#include "Commercial.h"
 
 using namespace std;
 
@@ -19,15 +21,47 @@ void check_cin(int& userInput)
         userInput = 0;
     }
 }
+/*double caclTaxes(bool commRental, bool commNonRent, bool resVacant, bool resOccupied, bool bdiscounted, double discountAmt, double value )
+{
+	const double commRentalTaxRate = .012;
+	const double commNonRentTaxRate = .01;
+	const double resVacantRentalTaxRate = .006;
+	const double resOccupiedRentalTaxRate = .009;
+	double rate;
+	if (commRental)
+	{
+		rate = commRentalTaxRate;
+	}
+	else if (commNonRent)
+	{
+		rate = commNonRentTaxRate;
+	}
+	else if (resVacant)
+	{
+		rate = resVacantRentalTaxRate;
+	}
+	else if (resOccupied)
+	{
+		rate = resOccupiedRentalTaxRate;
+	}
+	double taxAmt = value * rate;
+	if (bdiscounted)
+	{
+		taxAmt -= discountAmt;
+	}
+	return taxAmt;
+}*/
 
 int main()
 {
+	//collect input
 	vector<Property*> Properties;
 	string fileName;
 	cout << "Name of File: " << endl;
 	cin >> fileName;
 	string line;
 	ifstream myfile (fileName);
+	//make each line an array of characters and loop through to 
 	if (myfile.is_open())
 	{
 		while ( getline (myfile,line) )
@@ -40,7 +74,6 @@ int main()
 			string type = line.substr(0,i);
 			if (type == "Residential")
 			{
-				cout << type << endl;
 				while (isspace(line[i]))
 				{
 					i++;
@@ -51,10 +84,10 @@ int main()
 					i++;
 				}
 				string rental = line.substr(j,i-j); //collecting what should be one digit either 0 or 1
-				cout << rental << endl;
 				if (rental.size() > 1)
 				{
-					//do nothing for now
+					string errorLine = line.substr(0); //Get the whole line and print it as an ERROR
+					cout << "Ignoring bad RESIDENTIAL in input file: " << errorLine << endl;
 				}
 				else
 				{
@@ -65,7 +98,8 @@ int main()
 					int k = i;
 					if (!isdigit(line[i]))
 					{
-						//do nothing for now.
+						string errorLine = line.substr(0); //Get the whole line and print it as an ERROR
+						cout << "Ignoring bad RESIDENTIAL in input file: " << errorLine << endl;
 					}
 					else
 					{
@@ -74,7 +108,6 @@ int main()
 							i++;
 						}
 						string value = line.substr(k,i-k); //collecting what should be the value of the property
-						cout << value << endl;
 						while (isspace(line[i]))//this is looping through what should be one space with no characters present
 						{
 							i++;
@@ -82,7 +115,8 @@ int main()
 						int l = i;
 						if (!isdigit(line[i]))
 						{
-							//do nothing for now
+							string errorLine = line.substr(0); //Get the whole line and print it as an ERROR
+							cout << "Ignoring bad RESIDENTIAL in input file: " << errorLine << endl;
 						}
 						else
 						{
@@ -91,10 +125,10 @@ int main()
 								i++;
 							}
 							string vacant = line.substr(l,i-l);
-							cout << vacant << endl;
 							if (vacant.size() > 1)
 							{
-								//do nothing for now
+								string errorLine = line.substr(0); //Get the whole line and print it as an ERROR
+							cout << "Ignoring bad RESIDENTIAL in input file: " << errorLine << endl;
 							}
 							else
 							{
@@ -103,8 +137,29 @@ int main()
 									i++;
 								}
 								string address = line.substr(i);
-								cout << address << endl;
-								Properties.push_back(new Property(address));
+								bool brental;
+								if (rental == "0")
+								{
+									brental = false;
+								}
+								else
+								{
+									brental = true;
+								}
+								bool occupied;
+								if (vacant == "0")
+								{
+									occupied = false;
+								}
+								else
+								{
+									occupied = true;
+								}
+								double dvalue;
+								stringstream st;
+								st << value;
+								st >> dvalue;
+								Properties.push_back(new Residential(brental, dvalue, occupied, address));
 							}
 						}
 					}
@@ -112,7 +167,6 @@ int main()
 			}
 			else if (type == "Commercial")
 			{
-				cout << type << endl;
 				while (isspace(line[i]))
 				{
 					i++;
@@ -123,10 +177,10 @@ int main()
 					i++;
 				}
 				string rental = line.substr(j,i-j); //collecting what should be one digit either 0 or 1
-				cout << rental << endl;
 				if (rental.size() > 1)
 				{
-					//do nothing for now
+					string errorLine = line.substr(0); //Get the whole line and print it as an ERROR
+					cout << "Ignoring bad RESIDENTIAL in input file: " << errorLine << endl;
 				}
 				else
 				{
@@ -137,7 +191,8 @@ int main()
 					int k = i;
 					if (!isdigit(line[i]))
 					{
-						//do nothing for now.
+						string errorLine = line.substr(0); //Get the whole line and print it as an ERROR
+						cout << "Ignoring bad RESIDENTIAL in input file: " << errorLine << endl;
 					}
 					else
 					{
@@ -146,7 +201,6 @@ int main()
 							i++;
 						}
 						string value = line.substr(k,i-k); //collecting what should be the value of the property
-						cout << value << endl;
 						while (isspace(line[i]))//this is looping through what should be one space with no characters present
 						{
 							i++;
@@ -154,7 +208,8 @@ int main()
 						int l = i;
 						if (!isdigit(line[i]))
 						{
-							//do nothing for now
+							string errorLine = line.substr(0); //Get the whole line and print it as an ERROR
+							cout << "Ignoring bad COMMERCIAL in input file: " << errorLine << endl;
 						}
 						else
 						{
@@ -163,10 +218,10 @@ int main()
 								i++;
 							}
 							string vacant = line.substr(l,i-l);
-							cout << vacant << endl;
 							if (vacant.size() > 1)
 							{
-								//do nothing for now
+								string errorLine = line.substr(0); //Get the whole line and print it as an ERROR
+								cout << "Ignoring bad COMMERCIAL in input file: " << errorLine << endl;
 							}
 							else
 							{
@@ -176,7 +231,8 @@ int main()
 								}
 								if (!isdigit(line[i]))
 								{
-									//do nothing for now
+									string errorLine = line.substr(0); //Get the whole line and print it as an ERROR
+									cout << "Ignoring bad COMMERCIAL in input file: " << errorLine << endl;
 								}
 								else
 								{
@@ -186,14 +242,38 @@ int main()
 										i++;
 									}
 									string discount = line.substr(m,i-m);
-									cout << discount << endl;
 									while (isspace(line[i]))//this is looping through what should be one space with no characters present
 									{
 										i++;
 									}
 									string address = line.substr(i);
-									cout << address << endl;
-									Properties.push_back(new Property(address));
+									bool brental;
+									if (rental == "0")
+									{
+										brental = false;
+									}
+									else
+									{
+										brental = true;
+									}
+									bool bdiscount;
+									if (vacant == "1")
+									{
+										bdiscount = true;
+									}
+									else
+									{
+										bdiscount = false; //its occupied
+									}
+									double dvalue;
+									stringstream st;
+									st << value;
+									st >> dvalue;
+									double ddiscount;
+									stringstream st2;
+									st2 << discount;
+									st2 >> ddiscount;
+									Properties.push_back(new Commercial(brental, dvalue, bdiscount, address, ddiscount));
 								}
 							}
 						}
@@ -204,16 +284,58 @@ int main()
 			{
 				
 				string entireLine = line;
-				cout << entireLine << endl;
+				cout << "Ignoring unknown types of properties appearing in the input file: " << entireLine << endl;
 			}	
 		}
-	}
+		cout << "All valid properties:" << endl;
+		for (int i = 0; i < Properties.size(); i++)
+		{
+			cout << Properties[i]->toString() << endl;
+		}
+		cout << endl << endl;
+		/*
+		//Print out TAX stuff
+		int userInput;
+		cout << "\n\n Please select one of these options: " << endl;
+		cout << "1 - Sort Tax Report by Tax Amount " << endl;
+		cout << "2 - Show Current Balance " << endl;
+		cout << "3 - Do not Sort Report " << endl;
+		cin >> userInput;
+		check_cin(userInput);
+		if (userInput == 1)
+		{
+			for (int i = 0; i < Properties.size(); i++)
+			{
+				for (int j = 0; j < Properties.size()-1; j++)
+				{
+					if (Properties[j]->getTaxDue() > Properties[i]->getTaxDue())
+					{
+						Property * temp = Properties[j+1];
+						Properties[j+1] = Properties[j];
+						Properties[j] = temp;
 
-	for (int i = 0; i < Properties.size(); i++)
+					}
+				}
+			} 
+		}
+		else if (userInput == 3)
+		{
+
+		}
+		*/
+		cout << "NOW PRINTING TAX REPORT:" << endl;
+		for (int i = 0; i < Properties.size(); i++)
+		{
+			cout << Properties[i]->taxReport();
+		}
+		cout << endl << endl;
+	}
+	else
 	{
-		cout << Properties[i]->toString();
+		cout << "Not able to open file." << endl;
 	}
 
+	
 
 	system("pause");
 	return 0;

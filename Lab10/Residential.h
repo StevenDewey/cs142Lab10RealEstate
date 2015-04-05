@@ -1,5 +1,5 @@
 #include "Property.h"
-#pragma once
+//#pragma once
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -8,10 +8,9 @@ using namespace std;
 class Residential : public Property
 {
 	private:
-		int rental;
-		double value;
-		int vacant;
-
+		bool vacant;
+		double newValue;
+		double taxDue;
 	public:
 		//---------------------------------------------------------------------------------------
 		/* 
@@ -20,9 +19,10 @@ class Residential : public Property
 		 * Handles creation and deletion of Residential Property objects.
 		 * 
 		 */
-		Residential(int rental_in, double value_in, int vacant_in);
+		Residential(bool rental_in, double value_in, bool vacant_in, string address_in);
 		~Residential();
-		
+		string taxReport();
+		double getTaxDue();
 		//---------------------------------------------------------------------------------------
 		/* 
 		 * toString
