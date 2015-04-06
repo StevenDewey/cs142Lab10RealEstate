@@ -9,7 +9,6 @@ class Residential : public Property
 {
 	private:
 		bool vacant;
-		double newValue;
 		double taxDue;
 	public:
 		//---------------------------------------------------------------------------------------

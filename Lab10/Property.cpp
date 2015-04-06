@@ -49,7 +49,4 @@ string Property::taxReport()
 
 	return ss.str();
 }
-double Property::getTaxDue()
-{
-	return 0;
-}
+

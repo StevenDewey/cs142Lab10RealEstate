@@ -8,8 +8,6 @@ Commercial::Commercial(bool rental_in, double value_in, bool bdiscount_in, strin
 {
 	discount = discount_in;
 	bdiscount = bdiscount_in;
-	newValue = value_in;
-	newRental = rental_in;
 }
 Commercial::~Commercial(){}
 
@@ -37,26 +35,26 @@ string Commercial::taxReport()
 
 	if (bdiscount)
 	{
-		newValue = newValue * (1 - discount);
+		value = value * (1 - discount);
 
-		if (newRental)
+		if (rental)
 		{
-			taxDue = newValue * TAXCOMRENT;
+			taxDue = value * TAXCOMRENT;
 		}
 		else
 		{
-			taxDue = newValue * TAXCOMNOT;
+			taxDue = value * TAXCOMNOT;
 		}
 	}
 	else
 	{
-		if (newRental)
+		if (rental)
 		{
-			taxDue = newValue * TAXCOMRENT;
+			taxDue = value * TAXCOMRENT;
 		}
 		else
 		{
-			taxDue = newValue * TAXCOMNOT;
+			taxDue = value * TAXCOMNOT;
 		}
 	}
 	
