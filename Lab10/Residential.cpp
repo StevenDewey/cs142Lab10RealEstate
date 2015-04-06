@@ -7,7 +7,7 @@ Residential::Residential(bool rental_in, double value_in, bool vacant_in, string
 	:Property(rental_in, value_in, address_in)
 {
 	vacant = vacant_in;
-	newValue = value_in;
+	value = value_in;
 }
 
 string Residential::toString()
@@ -31,11 +31,11 @@ string Residential::taxReport()
 	ss << Property::taxReport();
 	if (vacant) 
 	{
-		taxDue = newValue * TAXRESOCC;
+		taxDue = value * TAXRESOCC;
 	}
 	else
 	{
-		taxDue = newValue * TAXRESNOT;
+		taxDue = value * TAXRESNOT;
 	}
 	
 	ss << "Taxes due on this property are: " << taxDue << endl;

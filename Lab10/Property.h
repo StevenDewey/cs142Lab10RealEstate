@@ -9,7 +9,7 @@ using namespace std;
 
 class Property
 {
-	private:
+	protected:
 		bool rental;
 		double value;
 		string address;
@@ -40,5 +40,5 @@ class Property
 		virtual string toString();
 		//---------------------------------------------------------------------------------------
 		virtual string taxReport();
-		virtual double getTaxDue();
+		virtual double getTaxDue() = 0;
 };
